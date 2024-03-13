@@ -8,10 +8,10 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 
 # Database connection details
-host = "192.168.1.241"
+host = "ip"
 port = 3306
 user = "fyp"
-password = "He1I0world"
+password = "pw"
 database = "fyp"
 
 

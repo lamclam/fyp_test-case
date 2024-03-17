@@ -8,10 +8,10 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 
 # Database connection details
-host = "ip"
+host = "192.168.1.241"
 port = 3306
 user = "fyp"
-password = "pw"
+password = "He1I0world"
 database = "fyp"
 
 
@@ -91,7 +91,7 @@ def predict_class(new_x, question_id):
 
     # If no data found for the specific question ID, return None
     if not features:
-        return None
+        return None, None
 
     # Convert the features and classes to numpy arrays
     x = np.array(features)
@@ -102,15 +102,21 @@ def predict_class(new_x, question_id):
     knn.fit(x, classes)
 
     # Reshape the new point into a 2D array
-    new_point = np.array([new_x])
+    new_point = np.array([new_x]).reshape(1, -1)
 
     # Predict the class of the new point
     prediction = knn.predict(new_point)
 
-    return prediction
+    # Get the distance and index of the nearest neighbor
+    distances, _indices = knn.kneighbors(new_point)
+
+    # Get the nearest neighbor distance
+    nearest_neighbor_distance = distances[0][0]
+
+    return prediction[0], nearest_neighbor_distance
 
 
-def get_suggestions(question_id: int, case_set: list):
+def get_suggestions(question_id: int, case_set: int):
     # Parse the JSON data
     suggestion = json.loads(
         get_data("QuestionSuggestions", None, f"QuestionID = {question_id}"))
@@ -126,8 +132,8 @@ def get_suggestions(question_id: int, case_set: list):
         # Split the 'CaseSet' string into a list of integers
         case_set_numbers = {int(x) for x in d['CaseSet'].split(',')}
 
-        # Check if any number in the input case_set list matches the 'CaseSet' numbers
-        if any(num in case_set_numbers for num in case_set):
+        # Check if the case_set number matches the 'CaseSet' numbers
+        if case_set in case_set_numbers:
             # If we have not already matched this case set
             if d['CaseSet'] not in matched_case_sets:
                 # Split the 'Suggestion' string into a list at ' | ' and extend the all_suggestions list

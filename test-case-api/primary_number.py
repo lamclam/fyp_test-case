@@ -77,7 +77,7 @@ def primary_number(request_data):
         # Convert the 'CorrectResult' string into an int array
         item['CorrectResult'] = json.loads(item['CorrectResult'])
     temp_file = tempfile.NamedTemporaryFile(
-        suffix='.java', delete=False, dir='.', prefix='q1')
+        suffix='.java', delete=False, dir='.', prefix='q1_')
     temp_file_name = os.path.basename(temp_file.name[:-5])
 
     new_code = replace_class_name_in_code(code, temp_file_name)
@@ -100,10 +100,17 @@ def primary_number(request_data):
         # print(result_array != expected_array)
         if len(result_array) == len(expected_array):
             if result_array != expected_array:
-                predict = predict_class(result_array, 1)
-                new_json = get_suggestions(1, [predict[0]])
+                predict, distance = predict_class(result_array, 1)
+                new_json = get_suggestions(1, predict)
+                prediction_json = {
+                    'prediction': [
+                        {'class': int(predict)},
+                        {'distance': int(distance)}
+                    ]
+                }
                 response = {'results': results,
-                            'prediction': int(predict[0])}
+                            'prediction': int(predict)}
+                response.update(prediction_json)
                 response.update(new_json)
 
             else:

@@ -29,7 +29,7 @@ def void_result(test_file_stdout):
         if any(keyword in normalized_test_case for keyword in negative_keywords):
             # If any positive keyword is in the test case string, the result is true
             results.append(0)
-        elif normalized_test_case == "":
+        elif normalized_test_case == "" or normalized_test_case == "Error":
             # If the test case string is empty, the result is error
             results.append(2)
         else:
@@ -104,10 +104,15 @@ def palindrome(request_data):
                     test_output_content)
                 response = json.loads(response)
                 if wrong_result_array and len(results_array) == 16:
-                    predict = predict_class(results_array, 2)
-                    new_suggestions = get_suggestions(2, [predict[0]])
-                    response = {'results': response,
-                                'prediction': int(predict[0])}
+                    predict, distance = predict_class(results_array, 2)
+                    new_suggestions = get_suggestions(2, predict)
+                    prediction_json = {
+                        'prediction': [
+                            {'class': int(predict)},
+                            {'distance': int(distance)}
+                        ]
+                    }
+                    response.update(prediction_json or {})
                     response.update(new_suggestions or {})
             except subprocess.TimeoutExpired:
                 response = {'Error': 'The Java process timed out'}

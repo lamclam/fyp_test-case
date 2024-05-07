@@ -4,25 +4,6 @@ This is the source code of the test case checking system
 
 ## Get started
 
-### Structure
-
-The checking system is separate to two part: `api` and `frontend`
-
-Here is the structure of the folder:
-
-```
-fyp_test-case
-├── test-case-api
-│   ├── database_handler.py
-│   ├── main.py
-│   ├── result_handler.py
-│   └── requirements.txt
-├── test-case-frontend
-│   └── pages
-│       └── index.tsx
-└── README.md
-```
-
 ### Requirnment
 
 - **[Python 3](https://www.python.org/downloads/)** for api server

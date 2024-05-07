@@ -1,0 +1,63 @@
+.textArea {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+}
+
+.resultTextArea,
+.suggestionArea,
+.failedArea {
+    margin-bottom: 20px;
+    display: flex;
+    flex-flow: column;
+    gap: 0.25rem;
+}
+
+.suggestionArea {
+    gap: 1rem;
+    padding-left: 20px;
+}
+
+.failedArea {
+    gap: 0.5rem;
+    padding-left: 20px;
+}
+
+.helloText,
+.allCorrText {
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+    font-size: 1.15rem;
+}
+
+.normalText,
+.greenText,
+.redText {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.normalText {
+    color: #00cccc;
+}
+
+.greenText {
+    color: #00cc65;
+}
+
+.redText {
+    color: #ff5555;
+}
+
+/* More specific styles for list elements of test cases */
+.failedArea strong {
+    color: red;
+    /* Ensures text color is red for failed test cases */
+}
+
+.allTestCases li.incorrectTestCase {
+    color: red;
+    /* Specific list items for incorrect cases in the all cases list */
+}

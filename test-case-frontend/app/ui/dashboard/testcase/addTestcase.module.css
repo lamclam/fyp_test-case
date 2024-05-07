@@ -1,0 +1,66 @@
+.container {
+    background-color: var(--bgSoft);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    justify-content: space-between;
+    gap: 2.5rem;
+}
+
+.form input,
+.form textarea,
+.form select {
+    padding: 1rem;
+    background-color: var(--bg);
+    color: var(--text);
+    border: 2px solid #2e374a;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.form input,
+.form select {
+    width: 45%;
+    font-size: 1rem;
+}
+
+.form textarea {
+    width: 100%;
+    resize: none;
+    font-size: 1rem;
+}
+
+.form button {
+    padding: 1rem;
+    background-color: teal;
+    color: var(--text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form input:disabled {
+    background-color: #696969;
+}
+
+.fileInput label {
+    margin-bottom: 30px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-grow: 1;
+    gap: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.buttonGroup button {
+    flex-grow: 1;
+}
